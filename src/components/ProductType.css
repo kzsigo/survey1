@@ -1,0 +1,72 @@
+h1 {
+    color: azure;
+    font-family: 'Chillax', sans-serif;
+    font-weight: 600;
+    font-display: swap;
+    font-style: normal;
+}
+
+h2 {
+    font-family: 'Chillax', sans-serif;
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+}
+
+h3 {
+    font-family: 'Chillax', sans-serif;
+    font-weight: 200;
+    font-display: swap;
+    font-style: normal;
+}
+h4 {
+    font-family: 'Chillax', sans-serif;
+    font-weight: 200 700;
+    font-display: swap;
+    font-style: normal;
+}
+
+.black{
+    color: black;
+}
+.white{
+    color:azure;
+}
+
+
+    .sub-header-txt{
+        font-size:1rem;
+        text-align:center;
+}
+
+.main-container {
+    width: 80%;
+    padding: 1.3rem;
+    border-radius: 25px;
+    color: white;
+    opacity: 0.9;
+    background-color: #b1d2b7;
+    -webkit-filter: blur(.5px);
+    filter: blur(.5px);
+}
+
+.card-text {
+    font-size: 0.9rem;
+    font-family: sans-serif;
+    opacity:.8;
+}
+
+.custom-card {
+    width: 3rem;
+    border-radius: 10px;
+    border: none;
+    margin:1rem;
+}
+
+.selected-border {
+    border: solid;
+    border-style: solid;
+    border-width: 3.5px;
+    border-color: #27ace3;
+
+}

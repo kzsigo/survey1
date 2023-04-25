@@ -1,0 +1,214 @@
+.btn-options{
+    padding-top:4rem;
+}
+.welcome {
+    margin-top: 0rem;
+    margin-bottom: 3rem;
+    width: 100%;
+    padding: 4rem 1.3rem 1.3rem 1.3rem;
+    border-bottom-left-radius:25px;
+    border-bottom-right-radius:25px;
+    color: white;
+    opacity: 0.9;
+    -webkit-filter: blur(.5px);
+    filter: blur(.5px);
+}
+
+.App {
+    text-align: center;
+    background-image: url('images/SS2.JPEG');
+    background-position:right;
+    background-size:cover;
+    background-attachment: fixed;
+}
+.App1 {
+    text-align: center;
+    background-image: url('images/SS16.jpg');
+    background-position:right;
+    background-size:cover;
+    background-attachment: fixed;
+}
+.App2 {
+    text-align: center;
+    background-image: url('images/SS12.JPG');
+    background-position:right;
+    background-size:cover;
+    background-attachment: fixed;
+}
+.App3 {
+    text-align: center;
+    background-image: url('images/SS3.JPEG');
+    background-position:right;
+    background-size:cover;
+    background-attachment: fixed;
+}
+.App4 {
+    text-align: center;
+    background-image: url('images/SS16.jpg');
+    background-position:right;
+    background-size:cover;
+    background-attachment: fixed;
+}
+.App5 {
+    text-align: center;
+    background-image: url('images/SS15.JPG');
+    background-position:right;
+    background-size:cover;
+    background-attachment: fixed;
+}
+.App6 {
+    text-align: center;
+    background-image: url('images/SS6.JPEG');
+    background-position:right;
+    background-size:cover;
+    background-attachment: fixed;
+}
+.App7 {
+    text-align: center;
+    background-image: url('images/SS7.JPEG');
+    background-position:right;
+    background-size:cover;
+    background-attachment: fixed;
+}
+button{
+    border-radius:10px;
+}
+.title {
+    height: 3rem;
+    color: black;
+    padding: 1rem 0 0 1rem;
+    font-family: 'Chillax', sans-serif;
+}
+.title-container {
+    height: 3rem;
+    background-color: white;
+    position: fixed;
+    z-index: 1000;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.top-space{
+    height:4rem;
+}
+.logo {
+  height: 2.4rem;
+  pointer-events: none;
+  margin-top:.10rem;
+}
+.footer-container {
+    height: 3rem;
+    background-color: white;
+    z-index: 1000;
+    border-top-left-radius:20px;
+    border-top-right-radius:20px;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 800s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+h1 {
+    color: azure;
+    font-family: 'Chillax', sans-serif;
+    font-weight: 600;
+    font-display: swap;
+    font-style: normal;
+}
+
+h2 {
+    font-family: 'Chillax', sans-serif;
+    font-weight: 400;
+    font-display: swap;
+    font-style: normal;
+}
+
+h3 {
+    font-family: 'Chillax', sans-serif;
+    font-weight: 200;
+    font-display: swap;
+    font-style: normal;
+}
+
+h4 {
+    font-family: 'Chillax', sans-serif;
+    font-weight: 200 700;
+    font-display: swap;
+    font-style: normal;
+}
+
+.black {
+    color: black;
+}
+
+.bg-black {
+    background-color: black;
+}
+
+.white {
+    color: azure;
+}
+
+.bg-white {
+    background-color: white;
+}
+
+.blue {
+    color: #26ace2;
+}
+
+.bg-blue {
+    background-color: #26ace2;
+}
+
+.green {
+    color: #b1d2b7;
+}
+
+.bg-green {
+    background-color: #b1d2b7;
+}
+
+.peach {
+    color: #f58f78;
+}
+
+.bg-peach {
+    background-color: #f58f78;
+}
+
+.purple {
+    color: #cbabd1;
+}
+
+.bg-purple {
+    background-color: #cbabd1;
+}
+
+.MuiBox-root{
+    display: inline;
+    align-content: center;
+}
