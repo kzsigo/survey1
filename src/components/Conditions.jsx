@@ -270,9 +270,6 @@ function Conditions({ sendConditions }) {
     }
     function setConditionSelectionHandler(conditionID) {
         switch (conditionID) {
-            case 1:
-                return isFlowerSelected ? '' : ' selected-border'
-                break;
             case 32:
                 return isPainSelected ? 'btn-light' : 'btn-info selected-border'
                 break;
