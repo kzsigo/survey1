@@ -398,13 +398,12 @@ function App() {
                     scrollToConditionsChild()
                 }} />
                 <div className="top-space" ref={conditionsDivRef} />
-               {displayConditions ? < Conditions sendConditions={(value) => {
-                    formInputData.ConditionIDs = value
-                    console.log(formInputData.StrainTypeIDs)
+                {displayConditions ? < Conditions sendConditions={(value) => {
+                    formInputData.ConditionIDs = value;
+                    console.log(formInputData.StrainTypeIDs);
                     formInputData.StrainTypeIDs.includes(1) || formInputData.StrainTypeIDs.includes(7) ? setDisplayTastes(true) : null;
-                    formInputData.StrainTypeIDs.includes(1) || formInputData.StrainTypeIDs.includes(7) ? setDisplayProduct1(true) : null;
                     formInputData.StrainTypeIDs.includes(2) || formInputData.StrainTypeIDs.includes(6) ? setDisplayProduct2(true) : null;
-                    scrollToTastesChild()
+                    return scrollToTastesChild();
                 }} /> : null}
 
                 <div className="top-space" ref={tastesDivRef} />
