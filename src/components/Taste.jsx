@@ -182,8 +182,8 @@ function Taste({ sendTastes, type }) {
                 <br/>
                 <br/>
                 <p className="sub-header-txt purple">***Please do not use Cannabis if you are pregnant, expecting or breast-feeding***</p>
-                <button type="button" onClick={handleTastesSelection} className="btn btn-outline-success">Next</button>
             </div>
+            <button type="button" onClick={handleTastesSelection} className="btn btn-success">Next</button>
         </div>
   );
 }

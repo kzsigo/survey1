@@ -339,9 +339,9 @@ function Conditions({ sendConditions }) {
                 ))}
                 <br/>
                 <br/>
-                <p className="sub-header-txt peach">***Please do not use Cannabis if you are pregnant, expecting or breast-feeding***</p>
-                <button type="button" onClick={handleConditionsSelection} className="btn btn-success">Next</button>
+                <h4 className="sub-header-txt peach">***Please do not use Cannabis if you are pregnant, expecting or breast-feeding***</h4>
             </div>
+            <button type="button" onClick={handleConditionsSelection} className="btn btn-success">Next</button>
         </div>
   );
 }

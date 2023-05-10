@@ -36,7 +36,7 @@ export default function Results({ SearchID, runResponseList, analysisResponse, t
             {console.log('analysisResponse from Results Component', analysisResponse)}
             {console.log('Run ResponseList from Results Component', runResponseList)}
             <div>
-                <p>Based on your responses, you will benefit most from the folowing terpenes:</p>
+                <h2>Based on your responses</h2> <p>you will benefit most from the folowing terpenes:</p>
                     <ul>{analysisResponse.map((results) => (<li>{results.TerpeneCannabinoid} for {results.Property}</li>))}</ul>
             </div>
             {runResponseList.map((response) => (                       
@@ -45,11 +45,10 @@ export default function Results({ SearchID, runResponseList, analysisResponse, t
                                 <Carousel responsive={responsive}>
                                     {response.map((results) => (
                                         <div className="container main-container" key={results.StrainID}>
-                                            <div><b>Type</b>: {results.StrainType}</div>
-                                            <div><b>Product</b>: {results.Strain}</div>
+\                                            <div><b>Product</b>: {results.Strain}</div>
                                             <div><b>Species</b>: {results.Species}</div>
-                                            <div><b>Total THC</b>: {results.TotalTHC}</div>
-                                            <div><b>Total CBD</b>: {results.TotalCBD}</div>
+                                            <div>{results.TotalTHC} <b>THC</b></div>
+                                            <div>{results.TotalCBD} <b>CBD</b></div>
                                             <div><a href={'https://dutchie.com/dispensary/pleasantrees-detroit/products?search=' + results.Strain} target="_blank">Search Product</a></div>
                                         </div>
                                     ))}
@@ -59,21 +58,6 @@ export default function Results({ SearchID, runResponseList, analysisResponse, t
 
                 ) 
             }
-            <div>
-                <h2>Benefits</h2>
-                <Carousel responsive={responsive}>
-                    {analysisResponse.map((analysis) => (
-                        <div className="container main-container" key={analysis.TerpeneCannabinoid}>
-                            <div><b>Terpene</b>: {analysis.TerpeneCannabinoid}</div>
-                            <div><b>Property</b>: {analysis.Property}</div>
-                        </div>
-                    ))}
-                </Carousel>
-            </div>
-            <div>
-                <h2>Next Steps</h2>
-
-            </div>
         </div>
     );
 }
