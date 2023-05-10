@@ -15,7 +15,7 @@ export default function Weight({ sendWeight }) {
     };
 
     return (
-        <div className="container main-container opacity">
+        <div className="breathe container main-container opacity">
             <h2 className="headerTxt purple">What do you value most?</h2>
             <h6 className="sub-header-txt">Place the slider for your weight range</h6>
             <div className="justify-content-center container">
@@ -33,8 +33,8 @@ export default function Weight({ sendWeight }) {
                     />
                 </Box>
                 <div className="d-flex bd-highlight">
-                    <div className="p-2  bd-highlight"><h2>Taste</h2></div>
-                    <div className="ms-auto p-2 bd-highlight"><h2>Benefits</h2></div>
+                    <div className="p-2 bd-highlight purple"><h2>Taste</h2></div>
+                    <div className="ms-auto p-2 bd-highlight purple"><h2>Benefits</h2></div>
                 </div>
             </div>
         </div>

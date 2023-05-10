@@ -1,4 +1,4 @@
-import logo from './images/logo2.PNG';
+import logo from './images/logo2.png';
 import headerImage from './images/doctors.png';
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios'
@@ -10,6 +10,7 @@ import Weight from './components/Weight.jsx'
 import Taste from './components/Taste.jsx'
 import Results from './components/Results.jsx'
 import getTokenBody from './getToken.json'
+import { useQuery } from '@tanstack/react-query';
 
 function App() {
 
@@ -18,7 +19,7 @@ function App() {
     const [optionsDisplay, setOptionsDisplay] = useState(true);
 
     //To do: go through this, some of these were made for visbility for troubleshoot
-    const [token, setToken] = useState('')
+    //const [token, setToken] = useState('')
     //const [CustomerID, setCustomerID] = useState()
     const [strainIDs, setStrainIDs] = useState([])
     const [SearchID, setSearchID] = useState()
@@ -57,22 +58,19 @@ function App() {
     }
 
     //Get intial Toekn
-    useEffect(() => {
-        async function getToken() {
-            try {
-                const res = await axios.post
-                    (
-                        'https://ss.prestoapi.com/api/login',
-                        getTokenBody,
-                    );
-                setToken(res.data.token)
-                console.log(token);
-            } catch (err) {
-                console.log(err)
-            }
-        }
-        getToken();
-    }, [])
+    function fetchToken() {
+        return axios.post
+            (
+                'https://ss.prestoapi.com/api/login',
+                getTokenBody,
+            )
+            .then(res => res.data.token)
+    }
+
+    const { data: token, error } = useQuery({
+        queryKey: ['token'],
+        queryFn: fetchToken
+    })
 
 
     //JSON
@@ -135,10 +133,10 @@ function App() {
     //To Do: bring all other next functions here... right now the sendItem 
     //fucntions are created in the component..
     const handleFormSubmit = async (evnt) => {
-        //await evnt.preventDefault();
         const checkEmptyInput = await !Object.values(formInputData).every(res => res === "")
         if (checkEmptyInput) {
-
+            //TODO: Log this error somewhere? Do we need a user-friendly message when this error occurs?
+            //where are we gonna log errors?
             console.log(formInputData)
         }
     }
@@ -191,79 +189,39 @@ function App() {
                 return response.data
             }
 
-            console.log(searchAddRequestBodies)
-            console.log('request body 1')
-            console.log(firstRequestBody)
-
             const runRequestBody = await searchAddResponse(firstRequestBody)
-            console.log(runRequestBody)
             let searchIDTemp = await runRequestBody[0].SearchID
             searchIDsTemp.push(searchIDTemp)
             const CustomerIDTemp = await runRequestBody[0].CustomerID
-            console.log(CustomerIDTemp)
 
-            console.log(searchIDTemp)
             await setSearchID(searchIDTemp)
-            console.log(SearchID)
             await setSearchRunRequestBody({ ...searchRunRequestBody, SearchID: searchIDTemp })
             let newBody = await { ...searchRunRequestBody, SearchID: searchIDTemp }
             await searchRunRequestBodies.push(newBody)
+
             //TEMP FOR DEMO
             setRunResults(searchRunRequestBodies)
-
-            console.log(newBody)
-            console.log(searchRunRequestBody.SearchID)
-            console.log(searchIDTemp)
-            /*const myRunResponseBody = await searchRunResponse(searchRunRequestBody, token)
-
-            setRunResults(await myRunResponseBody)
-            console.log(runResults)
-            setDisplayResult(true)*/
-            console.log('rest of bodies', restRequestBodies)
             if (restRequestBodies.length > 0) {
                 //make the rest of the calls
-                console.log('rest of Request Bodies', restRequestBodies)
                 for (const request of restRequestBodies) {
-                    console.log('Iterarting Request', request)
-                    console.log(CustomerIDTemp)
                     const body = await { ...request, CustomerID: CustomerIDTemp }
-                    console.log('request Body', body)
                     const res2 = await searchAddResponse(body, token)
-                    console.log('search add response', res2)
                     searchIDTemp = await res2[0].SearchID
                     searchIDsTemp.push(searchIDTemp)
-                    console.log('Iterating SearchID', searchIDTemp)
                     await searchRunRequestBodies.push({ ...searchRunRequestBody, SearchID: searchIDTemp})
-
                 }
                 setSearchIDs(searchIDsTemp)
-                console.log('Final Search ID', searchIDTemp)
-                console.log('Final Search IDs', searchIDsTemp)
-                console.log('Search Run Bodies', searchRunRequestBodies)
                 newBody = await { ...searchRunRequestBody, SearchID: searchIDTemp }
             }
-
-                console.log('Final SearchID:', searchIDTemp);
-
-            console.log('final Body', newBody)
             return searchRunRequestBodies
         } catch (err) {
+            //TODO: Log this error somewhere? Do we need a user-friendly message when this error occurs?
+            //where are we gonna log errors?
             console.log(err)
         }
-        //not working
-        /*console.log(SearchID)
-        return SearchID*/
     }
     async function makeRunRequest(requestBody) {
-        console.log(requestBody)
-        console.log('SearchID', SearchID)
-        /*const newBody = await { ...searchRunRequestBody, SearchID: SearchID }
-        await setSearchRunRequestBody(newBody)*/
         const response = await searchRunResponse({ ...searchRunRequestBody, SearchID: requestBody.SearchID })
-        /*await setRunResults(response)
-        console.log("Run Response List", runResultsList)
-        console.log("Run Response", response)
-        setRunResults(runResultsList)*/
         return response
     }
 
@@ -288,25 +246,17 @@ function App() {
         await runResults.map((result) => {
             strainIDsTemp.push(result.StrainID)
         })
-
         await setStrainIDs(strainIDsTemp)
         const body = await { ...analysisRequest, SearchID: SearchID, StrainID: strainIDsTemp[0] }
         await setAnalysisRequest(body)
-
         return body
-
     }
     async function makeAnalysisRequest(requestBody, searchID) {
         //Make first call
 
         try {
-            //setAnalysisRequest({ ...analysisRequest, SearchID: SearchID, StrainID:strainIDs[0] })
-            
             async function searchAnalysisResponse() {
-                console.log(SearchID)
-                console.log('request Body', requestBody)
                 const newBody = await { ...analysisRequest, SearchID: searchID, StrainID: requestBody.StrainID }
-                console.log(newBody)
                 const response = await axios.post
                     (
                         /*Request URL*/'https://ss.prestoapi.com/api/v1_scoreanalysis',
@@ -319,14 +269,14 @@ function App() {
                             }
                         }
                 );
-                console.log('analysis', response)
                 return  response.data
             }
             const response = await searchAnalysisResponse(analysisRequest)
             await setAnalysisResults(response)
-            console.log('analysis', response)
             return response
         } catch (err) {
+            //TODO: Log this error somewhere? Do we need a user-friendly message when this error occurs?
+            //where are we gonna log errors?
             console.log(err)
         }
 
@@ -334,23 +284,17 @@ function App() {
 
     //This is kinda hacky. I was playing around with timing and created the 'Final Submit Button'
     async function submitButton() {
-        await handleFormSubmit()
+        //await handleFormSubmit()
         await prepareAddRequestBody()
         const respList = await makeAddRequests()
-        console.log('respList', respList)
         await respList.map(async (requestBody) => {
             const runResponseTemp = await makeRunRequest(requestBody)
             await runResultsList.push(runResponseTemp)
         })
         await setRunResults(runResultsList)
-        //Commented Out FOR DEMO
-        //await setRunResults(runResultsList)
-        console.log('runResultsList1', runResultsList)
         const resp2 = await prepareAnalysisRequestBody(respList[0])
         const analysisResultTemp = await makeAnalysisRequest(resp2, respList[0].SearchID)
         await setAnalysisResults(analysisResultTemp)
-        
-        console.log('runResultsList2', runResultsList)
     }
 
     //This is kinda hacky. I was playing around with timing and created the 'Final Submit Button'
@@ -386,9 +330,9 @@ function App() {
                 </div>
             </div>
             <div className="welcome container-fluid white">
-                <h1 className="white">Welcome to <br />NoBo</h1>
+                <h1 className="blue">Welcome to <br />NoBo</h1>
+                <h3 className="purple"><b>Use this interactive menu for our top recommendations tailored specifically for you.</b></h3>
                 <img src={headerImage} className="img-fluid" alt="Responsive image" />
-                <h3 className="purple"><b>Use this interactive menu for [The Dispensary]'s top receommendations specifically for your</b></h3>
             </div>
             <form >
                 <ProductType sendStrainTypes={(value) => {
@@ -414,7 +358,7 @@ function App() {
                     scrollToPotencyChild()
                 }} /> : null}
                 
-                <div className="top-space" ref={potencyDivRef} />
+                <div ref={potencyDivRef} />
                 {displayProduct1 ? < Potency type="Flower and/or Pre-Roll" min={0} max={60} sendTHCMin={(value) => potency1[0] = value} sendTHCMax={(value) => potency1[1] = value} /> : null}
                 {displayProduct2 ? <Potency type="Concentrate and/or DSO" min={40} max={100} sendTHCMin={(value) => potency2[0] = value} sendTHCMax={(value) => potency2[1] = value} /> : null}
                 {displayWeight ? < Weight sendWeight={(value) => {
