@@ -16,7 +16,7 @@ export default function Potency({min, max, sendTHCMin, sendTHCMax, type}) {
     };
     
     return (
-        <div className="breathe container main-container opacity">
+        <div className="container main-container opacity">
             <h2 className="headerTxt purple">Choose THC% range for your {type}</h2>
             <h6 className="sub-header-txt">Place the slider for your THC Potency range</h6>
             <div className="justify-content-center container">

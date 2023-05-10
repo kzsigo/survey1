@@ -271,46 +271,46 @@ function Conditions({ sendConditions }) {
     function setConditionSelectionHandler(conditionID) {
         switch (conditionID) {
             case 32:
-                return isPainSelected ? 'btn-outline-info' : 'btn-info selected-border'
+                return isPainSelected ? 'btn-light' : 'btn-info selected-border'
                 break;
             case 33:
-                return isPTSDSelected ? 'btn-outline-info' : 'btn-info selected-border'
+                return isPTSDSelected ? 'btn-light' : 'btn-info selected-border'
                 break;
             case 34:
-                return isSleepSelected ? 'btn-outline-info' : 'btn-info selected-border'
+                return isSleepSelected ? 'btn-light' : 'btn-info selected-border'
                 break;
             case 35:
-                return isMuscleSpasmsSelected ? 'btn-outline-info' : 'btn-info selected-border'
+                return isMuscleSpasmsSelected ? 'btn-light' : 'btn-info selected-border'
                 break;
             case 36:
-                return isDayFocusSelected ? 'btn-outline-info' : 'btn-info selected-border'
+                return isDayFocusSelected ? 'btn-light' : 'btn-info selected-border'
                 break;
             case 37:
-                return isHappySelected ? 'btn-outline-info' : 'btn-info selected-border'
+                return isHappySelected ? 'btn-light' : 'btn-info selected-border'
                 break;
             case 38:
-                return isCalmSelected ? 'btn-outline-info' : 'btn-info selected-border'
+                return isCalmSelected ? 'btn-light' : 'btn-info selected-border'
                 break;
             case 39:
-                return isGentleHighSelected ? 'btn-outline-info' : 'btn-info selected-border'
+                return isGentleHighSelected ? 'btn-light' : 'btn-info selected-border'
                 break;
             case 40:
-                return isFocusSelected ? 'btn-outline-info' : 'btn-info selected-border'
+                return isFocusSelected ? 'btn-light' : 'btn-info selected-border'
                 break;
             case 41:
-                return isSleepySelected ? 'btn-outline-info' : 'btn-info selected-border'
+                return isSleepySelected ? 'btn-light' : 'btn-info selected-border'
                 break;
             case 42:
-                return isStrongHighSelected ? 'btn-outline-info' : 'btn-info selected-border'
+                return isStrongHighSelected ? 'btn-light' : 'btn-info selected-border'
                 break;
             case 43:
-                return isNauseaSelected ? 'btn-outline-info' : 'btn-info selected-border'
+                return isNauseaSelected ? 'btn-light' : 'btn-info selected-border'
                 break;
             case 44:
-                return isAnxietySelected ? 'btn-outline-info' : 'btn-info selected-border'
+                return isAnxietySelected ? 'btn-light' : 'btn-info selected-border'
                 break;
             case 45:
-                return isADHDSelected ? 'btn-outline-info' : 'btn-info selected-border'
+                return isADHDSelected ? 'btn-light' : 'btn-info selected-border'
                 break;
             default:
                 return "Default"
@@ -325,7 +325,7 @@ function Conditions({ sendConditions }) {
     return (
         <div className="container main-container">
             <h2 className="headerTxt peach">What Benefits Are You Looking For Today?</h2>
-            <h6 className="sub-header-txt peach">(choose up to 3)</h6 >
+            <h6 className="sub-header-txt">(choose up to 3)</h6 >
             <div className="options d-flex flex-row justify-content-center flex-wrap mb-3">
                 
                 {loading && conditions.map((conditions) => (
@@ -335,14 +335,94 @@ function Conditions({ sendConditions }) {
                             >
                             {conditions.Condition}
                         </button>                       
+                        {
+                            //<img src={photoHandler(conditions.ConditionID)} className={setConditionSelectionHandler(conditions.ConditionID)} alt="..." style={{ borderRadius: 10 }} />
+                        }
                     </div>
                 ))}
                 <br/>
                 <br/>
                 <p className="sub-header-txt peach">***Please do not use Cannabis if you are pregnant, expecting or breast-feeding***</p>
-                <button type="button" onClick={handleConditionsSelection} className="btn btn-success">Next</button>
+                <button type="button" onClick={handleConditionsSelection} className="btn btn-outline-success">Next</button>
             </div>
         </div>
   );
 }
+/*<div className="custom-card" onClick={toggleCalm}>
+                    <img src={calmPhoto} className={isCalmSelected ? 'card-img-top' : 'card-img-top selected-border'} alt="..." style={{ borderRadius: 10 }} />
+                    <div className="card-body">
+                        <p className="card-text">Feel Calm</p>
+                    </div>
+                </div>
+
+                <div className="custom-card" onClick={toggleDepression}>
+                    <img src={depressionPhoto} className={isDepressionSelected ? 'card-img-top' : 'card-img-top selected-border'} alt="..." style={{ borderRadius: 10 }} />
+                    <div className="card-body">
+                        <p className="card-text">Relieve Depression</p>
+                    </div>
+                </div>
+
+                <div className="custom-card" onClick={toggleFocus}>
+                    <img src={focusPhoto} className={isFocusSelected ? 'card-img-top' : 'card-img-top selected-border'} alt="..." style={{ borderRadius: 10 }} />
+                    <div className="card-body">
+                        <p className="card-text">Focus</p>
+                    </div>
+                </div>
+
+                <div className="custom-card" onClick={toggleGentleHigh}>
+                    <img src={gentleHighPhoto} className={isGentleHighSelected ? 'card-img-top' : 'card-img-top selected-border'} alt="..." style={{ borderRadius: 10 }} />
+                    <div className="card-body">
+                        <p className="card-text">Gentle High</p>
+                    </div>
+                </div>
+
+                <div className="custom-card" onClick={toggleHappy}>
+                    <img src={happyPhoto} className={isHappySelected ? 'card-img-top' : 'card-img-top selected-border'} alt="..." style={{ borderRadius: 10 }} />
+                    <div className="card-body">
+                        <p className="card-text">Feel Happy</p>
+                    </div>
+                </div>
+
+                <div className="custom-card" onClick={toggleInsomnia}>
+                    <img src={insomniaPhoto} className={isInsomniaSelected ? 'card-img-top' : 'card-img-top selected-border'} alt="..." style={{ borderRadius: 10 }} />
+                    <div className="card-body">
+                        <p className="card-text">Relieve Insomnia</p>
+                    </div>
+                </div>
+
+                <div className="custom-card" onClick={toggleMuscleSpasm}>
+                    <img src={muscleSpasmsPhoto} className={isMuscleSpasmSelected ? 'card-img-top' : 'card-img-top selected-border'} alt="..." style={{ borderRadius: 10 }} />
+                    <div className="card-body">
+                        <p className="card-text">Relieve Muscle Spasm</p>
+                    </div>
+                </div>
+
+                <div className="custom-card" onClick={toggleNausea}>
+                    <img src={nauseaPhoto} className={isNauseaSelected ? 'card-img-top' : 'card-img-top selected-border'} alt="..." style={{ borderRadius: 10 }} />
+                    <div className="card-body">
+                        <p className="card-text">Relieve Nausea</p>
+                    </div>
+                </div>
+
+                <div className="custom-card" onClick={togglePain}>
+                    <img src={painPhoto} className={isPainSelected ? 'card-img-top' : 'card-img-top selected-border'} alt="..." style={{ borderRadius: 10 }} />
+                    <div className="card-body">
+                        <p className="card-text">Relieve Pain</p>
+                    </div>
+                </div>
+
+                <div className="custom-card" onClick={toggleSleep}>
+                    <img src={sleepPhoto} className={isSleepSelected ? 'card-img-top' : 'card-img-top selected-border'} alt="..." style={{ borderRadius: 10 }} />
+                    <div className="card-body">
+                        <p className="card-text">Sleep</p>
+                    </div>
+                </div>
+
+                <div className="custom-card" onClick={toggleStrongHigh}>
+                    <img src={strongHighPhoto} className={isStrongHighSelected ? 'card-img-top' : 'card-img-top selected-border'} alt="..." style={{ borderRadius: 10 }} />
+                    <div className="card-body">
+                        <p className="card-text">Strong High</p>
+                    </div>
+                </div>*/
+
 export default Conditions;
