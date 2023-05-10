@@ -134,22 +134,22 @@ function Taste({ sendTastes, type }) {
     function setTasteSelectionHandler(tasteID) {
         switch (tasteID) {
             case 36:
-                return isFruitySelected ? 'btn-light' : 'btn-info selected-border'
+                return isFruitySelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             case 37:
-                return isEarthySelected ? 'btn-light' : 'btn-info selected-border'
+                return isEarthySelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             case 38:
-                return isBourbonSelected ? 'btn-light' : 'btn-info selected-border'
+                return isBourbonSelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             case 39:
-                return isHerbalSelected ? 'btn-light' : 'btn-info selected-border'
+                return isHerbalSelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             case 40:
-                return isSweetSelected ? 'btn-light' : 'btn-info selected-border'
+                return isSweetSelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             case 41:
-                return isSpicySelected ? 'btn-light' : 'btn-info selected-border'
+                return isSpicySelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             default:
                 return "Default"
@@ -163,8 +163,8 @@ function Taste({ sendTastes, type }) {
 
     return (
         <div className="container main-container">
-            <h2 className="headerTxt peach">{type }</h2>
-            <h6 className="sub-header-txt">(choose up to 3)</h6 >
+            <h2 className="headerTxt purple">{type }</h2>
+            <h6 className="sub-header-txt purple">(choose up to 3)</h6 >
             <div className="options d-flex flex-row justify-content-center flex-wrap mb-3">
                 
                 {loading && tastes.map((tastes) => (
@@ -181,7 +181,7 @@ function Taste({ sendTastes, type }) {
                 ))}
                 <br/>
                 <br/>
-                <p className="sub-header-txt peach">***Please do not use Cannabis if you are pregnant, expecting or breast-feeding***</p>
+                <p className="sub-header-txt purple">***Please do not use Cannabis if you are pregnant, expecting or breast-feeding***</p>
                 <button type="button" onClick={handleTastesSelection} className="btn btn-outline-success">Next</button>
             </div>
         </div>

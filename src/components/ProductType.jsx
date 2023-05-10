@@ -247,34 +247,34 @@ function ProductType({ sendStrainTypes }) {
     function setStrainSelectionHandler(StrainTypeID) {
         switch (StrainTypeID) {
             case 1:
-                return isFlowerSelected ? 'btn-light' : 'btn-info selected-border'
+                return isFlowerSelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             case 2:
-                return isConcentrateSelected ? 'btn-light' : 'btn-info selected-border'
+                return isConcentrateSelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             case 3:
-                return isEdibleSelected ? 'btn-light' : 'btn-info selected-border'
+                return isEdibleSelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             case 4:
-                return isTopicalSelected ? 'btn-light' : 'btn-info selected-border'
+                return isTopicalSelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             case 5:
-                return isTinctureSelected ? 'btn-light' : 'btn-info selected-border'
+                return isTinctureSelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             case 6:
-                return isRSOSelected ? 'btn-light' : 'btn-info selected-border'
+                return isRSOSelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             case 7:
-                return isPreRollSelected ? 'btn-light' : 'btn-info selected-border'
+                return isPreRollSelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             case 8:
-                return isCartSelected ? 'btn-light' : 'btn-info selected-border'
+                return isCartSelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             case 9:
-                return isDistillateSelected ? 'btn-light' : 'btn-info selected-border'
+                return isDistillateSelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             case 10:
-                return isMoonRockSelected ? 'btn-light' : 'btn-info selected-border'
+                return isMoonRockSelected ? 'btn-outline-info' : 'btn-info selected-border'
                 break;
             default:
                 return "Default"
@@ -294,7 +294,7 @@ function ProductType({ sendStrainTypes }) {
     return (
         
         <div className="container main-container opacity">
-            <h2 className="headerTxt purple">What Product Type Are You Looking For Today?</h2>
+            <h2 className="headerTxt blue">What Product Type Are You Looking For Today?</h2>
             <h6 className="sub-header-txt">(choose up to 3)</h6>
 
             <div className="options d-flex flex-row justify-content-center flex-wrap mb-3 no-opacity-product">
@@ -311,7 +311,7 @@ function ProductType({ sendStrainTypes }) {
                     </div>
                 ))}
             </div>
-            <button type="button" onClick={nextButton} className="btn btn-outline-success">Next</button>
+            <button type="button" onClick={nextButton} className="btn btn-success">Next</button>
  
         </div>
   );
