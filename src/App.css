@@ -16,7 +16,7 @@
 
 .App {
     text-align: center;
-    background-image: url('images/SS2.JPEG');
+    background-image: url('images/SS2.jpeg');
     background-position:right;
     background-size:cover;
     background-attachment: fixed;
@@ -30,14 +30,14 @@
 }
 .App2 {
     text-align: center;
-    background-image: url('images/SS12.JPG');
+    background-image: url('images/SS12.jpg');
     background-position:right;
     background-size:cover;
     background-attachment: fixed;
 }
 .App3 {
     text-align: center;
-    background-image: url('images/SS3.JPEG');
+    background-image: url('images/SS3.jpeg');
     background-position:right;
     background-size:cover;
     background-attachment: fixed;
@@ -51,21 +51,21 @@
 }
 .App5 {
     text-align: center;
-    background-image: url('images/SS15.JPG');
+    background-image: url('images/SS15.jpg');
     background-position:right;
     background-size:cover;
     background-attachment: fixed;
 }
 .App6 {
     text-align: center;
-    background-image: url('images/SS6.JPEG');
+    background-image: url('images/SS6.jpeg');
     background-position:right;
     background-size:cover;
     background-attachment: fixed;
 }
 .App7 {
     text-align: center;
-    background-image: url('images/SS7.JPEG');
+    background-image: url('images/SS7.jpeg');
     background-position:right;
     background-size:cover;
     background-attachment: fixed;
