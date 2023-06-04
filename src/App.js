@@ -11,9 +11,9 @@ import Taste from './components/Taste.jsx'
 import Results from './components/Results.jsx'
 import getTokenBody from './getToken.json'
 import { useQuery } from '@tanstack/react-query';
+import './scss/styles.scss';
 
 function App() {
-
     //Hooks for Background Changer
     const [appStyle, setAppStyle] = useState("App");
     const [optionsDisplay, setOptionsDisplay] = useState(true);
@@ -280,7 +280,7 @@ function App() {
             console.log(err)
         }
 
-    }
+    }   
 
     //This is kinda hacky. I was playing around with timing and created the 'Final Submit Button'
     async function submitButton() {
@@ -301,12 +301,152 @@ function App() {
     async function finalSubmitButton() {
         await submitButton()
         await setDisplayResult(true)
+        
+       await getQueue()
     }
 
     //Cut-off Ranges for 
     //Potency1: Flower, PreRoll | Potency2: Concentrate, DSO
     const potency1 = [0, 60]
     const potency2 = [40, 100]
+
+
+    //Start of Ally's Code
+    
+
+     const [queue, setQueue] = useState([])
+     const [conditionValue, setConditionValue] = useState([])
+     const [tasteWeightValue, setTasteWeightValue] = useState([])
+     const [smellWeightValue, setSmellWeightValue] = useState([])
+     const [thcMinValue, setThcMin] = useState([])
+     const [thcMaxValue, setThcMax] = useState([])
+     const [visible, setVisible] = useState(false);
+
+    //I know this is not right and will need restructured when we split out the files
+     const a = useQuery({
+        queryKey: ['queue'],
+        queryFn: getQueue,
+        enabled: false
+    })   
+
+    const b = useQuery({
+        queryKey: ['customer'],
+        queryFn: getActiveCustomer,
+        enabled: false
+    })
+
+    
+    const c = useQuery({
+        queryKey: ['results'],
+        queryFn: getSurveyResults,
+        enabled: false
+    })
+
+
+    //This is for testing and development so I can quickly get the token and populate the queue
+    async function refreshQueue() {
+        fetchToken()
+        getQueue()
+
+    }
+
+
+    //Customer Queue
+    async function getQueue() {
+        const requestBodyNew =  {
+            "DispensaryID": 2,
+             "TimeWindow":30000
+        };
+        const res = await axios.post
+            (
+                'https://ss.prestoapi.com/api/v1_surveyactive', requestBodyNew, {
+                    headers:
+                    {
+                        'Authorization': 'Bearer ' + token,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+            .then(response => {
+                const queue = response.data
+                setQueue(queue);
+              }) 
+    }
+
+
+    async function getActiveCustomer(customerID) {
+        //Get the customerID from the customer we clicked on in the queue
+        //Send that and the DispensaryID to return the SearchID, StrainTypeID, StrainTypes (survey results)
+        //Then go get all of the results from the survey they took with the SearchID we are returning
+        const requestBody =  {
+            "CustomerID":customerID,
+            "DispensaryID":2,
+            "TimeWindow":30000
+        };
+        return axios.post
+            (
+                'https://ss.prestoapi.com/api/v1_surveyactivecustomer', requestBody, {
+                    headers:
+                    {
+                        'Authorization': 'Bearer ' + token,
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+            .then(response => {
+                const [customerResults] = response.data
+                //get all of the survey answers from the specific user and search
+                getSurveyResults(customerResults.SearchID)
+                //also set the visible state to true for the Survey Answers
+                setVisible(true)
+              }) 
+    }
+
+
+    async function getSurveyResults(searchID) {
+        const requestBody =  {
+            "SearchID":searchID
+        };
+        return axios.post
+        (
+            'https://ss.prestoapi.com/api/v1_searchparameters', requestBody, {
+                headers:
+                {
+                    'Authorization': 'Bearer ' + token,
+                    'Content-Type': 'application/json'
+                }
+            }
+        )
+        .then(response => {
+            const surveyResults = response.data
+            setSurveyResults(surveyResults)
+   
+         
+          }) 
+
+    }
+
+
+
+    async function setSurveyResults(surveyResults) {
+        const conditions =  surveyResults.find(({ Label }) => Label === "Condition")
+        setConditionValue(conditions.Value) 
+        //where are we storing tastes? why is this not in this call?
+
+        //weights
+        const weightTaste = surveyResults.find(({ Label }) => Label === "WeightingTaste")
+        setTasteWeightValue(weightTaste)
+        const weightSmell = surveyResults.find(({ Label }) => Label === "WeightingSmell")
+        setSmellWeightValue(weightSmell)
+
+        //THC %
+        const thcMin =  surveyResults.find(({ Label }) => Label === "THCMin")
+        setThcMin(thcMin.Value)
+        const thcMax =  surveyResults.find(({ Label }) => Label === "THCMax")
+        setThcMax(thcMax.Value)
+
+    }
+   
    
     //HTML
     return (
@@ -371,14 +511,58 @@ function App() {
             </form>
             <div className="top-space" ref={resultsDivRef} />
             {displayResult && < Results token={token} SearchID={SearchID} runResponseList={runResults} analysisResponse={analysisResults} scrollFunction={scrollToResultsChild()} /> } <div className="top-space" />
+
+
+            
+
+            <section className="content">
+            <div className='customer-queue'>
+                <h2>Customer Queue</h2>
+                <ul>
+                   {/* are we keeping SearchID as the unique key? */}
+                   {queue.map((q) => (<li onClick={() => getActiveCustomer(q.CustomerID)} key={q.SearchID}>{q.Fname} {q.Lname}</li>))}
+                </ul>
+                <button onClick={refreshQueue} > Refresh </button>
+            </div>
+            {visible && (<div className="survey-answers">
+                    <h2>Survey Answers</h2>
+                    <div className="selected-results">
+                        <h3>Selected Effects:</h3>
+                        {/* for now just list the selected effects */}
+                       <span>{conditionValue}</span> 
+                    
+                    </div>
+                    <div className="selected-results">
+                        <h3>Selected Tastes:</h3>
+                        {/* for now just list the selected tastes */}
+                        
+                    </div>
+                    <div className="selected-results">
+                        <h3>Weighting Values:</h3>
+                        {/* for now just list the category and the number */}
+                       <span>{tasteWeightValue.Label === 'WeightingTaste' && (<label>Taste</label>)}: {tasteWeightValue.Value}</span> 
+                       <span>{smellWeightValue.Label === 'WeightingSmell' && (<label>Smell</label>)}: {smellWeightValue.Value}</span>  
+
+                    </div>
+                    <div className="selected-results">
+                        <h3>THC Range:</h3>
+                       <span> {thcMinValue}% - {thcMaxValue}%</span> 
+
+                    </div>
+
+                </div>)}
+                
+            </section>
+           
+
           <div className="footer-container container-fluid d-flex flex-row-reverse">
               <img className="logo" src={logo} alt="Strain Seekr Logo" />
               <p className="title"> <b>Strain Seekr x [Dispensary Name]</b></p>
             </div>
+       
             
     </div>
   );
 }
 
 export default App;
-

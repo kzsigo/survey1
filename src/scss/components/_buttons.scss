@@ -1,0 +1,12 @@
+button {
+    border-radius: .5rem;
+    color: $strain_seekr_blue;
+    font-weight: 600;
+    font-display: swap;
+    font-style: normal;
+
+    &:hover {
+        background-color: $strain_seekr_blue;
+        color: $white;
+    }
+}
