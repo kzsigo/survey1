@@ -1,8 +1,9 @@
 .content {
     display: flex;
-    h2 {
-        margin-bottom: 1rem;
+    header {
+        padding-top: 1rem;
         border-bottom: 1px solid $black;
+        margin-bottom: 2rem;
     }
     
     .customer-queue {
@@ -11,19 +12,26 @@
         border: 1px solid $black;
         border-radius: .5rem;
         background-color: $white;
+
+        header {
+            margin-bottom: 0;
+        };
     
      
     
         ul{
             padding-left: 0;
             font-size: 1.5rem;
-            padding: .5rem;
+            
+            li {
+                padding: .5rem;
+            }
     
             li:nth-child(even) {
-                    background-color: $light_grey;
+                    background-color: $white;
             }
             li:nth-child(odd) {
-                background-color: $dark_grey
+                background-color: $light_grey;
         }
             
         }
@@ -38,13 +46,20 @@
 
         .selected-results {
             margin-bottom: 1rem;
+          
 
         }
-
-        h3 {
-            font-weight:400;
-
+        
+        li {
+            border-bottom: 1.5rem;
         }
+
+        .result-button {
+            border: 1px solid $black;
+            border-radius: .5rem;
+            margin-right: .5rem;
+        }
+
         span {
             padding: .5rem;
             border: 1px solid $black;
