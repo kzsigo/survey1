@@ -1,0 +1,75 @@
+.content {
+    display: flex;
+    header {
+        padding-top: 1rem;
+        border-bottom: 1px solid $black;
+        margin-bottom: 2rem;
+    }
+    
+    .customer-queue {
+        width:50%;
+        margin: 1em;
+        border: 1px solid $black;
+        border-radius: .5rem;
+        background-color: $white;
+
+        header {
+            margin-bottom: 0;
+        };
+    
+     
+    
+        ul{
+            padding-left: 0;
+            font-size: 1.5rem;
+            
+            li {
+                padding: .5rem;
+            }
+    
+            li:nth-child(even) {
+                    background-color: $white;
+            }
+            li:nth-child(odd) {
+                background-color: $light_grey;
+        }
+            
+        }
+     }
+
+     .survey-answers {
+        width:50%;
+        margin: 1em;
+        border: 1px solid $black;
+        border-radius: .5rem;
+        background-color: $white;
+
+        .selected-results {
+            margin-bottom: 1rem;
+          
+
+        }
+        
+        li {
+            border-bottom: 1.5rem;
+        }
+
+        .result-button {
+            border: 1px solid $black;
+            border-radius: .5rem;
+            margin-right: .5rem;
+        }
+
+        span {
+            padding: .5rem;
+            border: 1px solid $black;
+            border-radius: .5rem;
+            margin-top: .5rem;
+            margin-bottom:2rem;
+        }
+     }
+
+}
+
+   
+

@@ -9,11 +9,12 @@ import Potency from './components/Potency.jsx'
 import Weight from './components/Weight.jsx'
 import Taste from './components/Taste.jsx'
 import Results from './components/Results.jsx'
+import Queue from './components/Queue.jsx';
 import getTokenBody from './getToken.json'
 import { useQuery } from '@tanstack/react-query';
+import './scss/styles.scss';
 
 function App() {
-
     //Hooks for Background Changer
     const [appStyle, setAppStyle] = useState("App");
     const [optionsDisplay, setOptionsDisplay] = useState(true);
@@ -280,7 +281,7 @@ function App() {
             console.log(err)
         }
 
-    }
+    }   
 
     //This is kinda hacky. I was playing around with timing and created the 'Final Submit Button'
     async function submitButton() {
@@ -301,12 +302,14 @@ function App() {
     async function finalSubmitButton() {
         await submitButton()
         await setDisplayResult(true)
+        
     }
 
     //Cut-off Ranges for 
     //Potency1: Flower, PreRoll | Potency2: Concentrate, DSO
     const potency1 = [0, 60]
     const potency2 = [40, 100]
+  
    
     //HTML
     return (
@@ -371,14 +374,24 @@ function App() {
             </form>
             <div className="top-space" ref={resultsDivRef} />
             {displayResult && < Results token={token} SearchID={SearchID} runResponseList={runResults} analysisResponse={analysisResults} scrollFunction={scrollToResultsChild()} /> } <div className="top-space" />
+
+
+            
+
+           <Queue/>
+      {/* <Queue getActiveCustomer={SurveyAnswers.getActiveCustomer} />
+      <SurveyAnswers getActiveCustomer={SurveyAnswers.getActiveCustomer} /> */}
+           
+
           <div className="footer-container container-fluid d-flex flex-row-reverse">
               <img className="logo" src={logo} alt="Strain Seekr Logo" />
               <p className="title"> <b>Strain Seekr x [Dispensary Name]</b></p>
+              <p> icon by <a href="https://icons8.com">Icons8</a></p>
             </div>
+       
             
     </div>
   );
 }
 
 export default App;
-
